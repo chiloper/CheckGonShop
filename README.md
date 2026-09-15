@@ -1,6 +1,6 @@
-# ComparePrice (Shopee, Lazada, TikTok Shop Price Comparison)
+# CheckGonShop (เช็คก่อนช้อป)
 
-ระบบค้นหาและเปรียบเทียบราคาสินค้า Multi-Platform จาก **Shopee, Lazada และ TikTok Shop** พัฒนาด้วยสถาปัตยกรรม **Monorepo (Next.js + NestJS)** รองรับการแสดงผลทั้งบนคอมพิวเตอร์และมือถืออย่างสมบูรณ์แบบ
+ระบบค้นหาและเปรียบเทียบราคาสินค้า Multi-Platform จาก **Shopee, Lazada และ TikTok Shop** (CheckGonShop - เช็คก่อนช้อป) พัฒนาด้วยสถาปัตยกรรม **Monorepo (Next.js + NestJS)** รองรับการแสดงผลทั้งบนคอมพิวเตอร์และมือถืออย่างสมบูรณ์แบบ
 
 ---
 

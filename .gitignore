@@ -1,0 +1,85 @@
+﻿# ==========================================
+# Dependencies
+# ==========================================
+node_modules/
+.pnp
+.pnp.js
+
+# ==========================================
+# Production & Build Outputs
+# ==========================================
+# Next.js
+.next/
+out/
+build/
+apps/web/.next/
+apps/web/out/
+apps/web/build/
+
+# NestJS / TypeScript
+dist/
+apps/api/dist/
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# ==========================================
+# Environment Variables & Secrets
+# ==========================================
+.env
+.env*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+apps/*/.env
+apps/*/.env*.local
+
+# Allow example environment files
+!.env.example
+!apps/*/.env.example
+
+# ==========================================
+# Logs & Debug
+# ==========================================
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# ==========================================
+# Testing & Coverage
+# ==========================================
+coverage/
+.nyc_output/
+
+# ==========================================
+# Temporary & Scratch Files
+# ==========================================
+scratch/
+scratch-item.json
+*.tmp
+*.temp
+.temp/
+
+# ==========================================
+# IDE & System Files
+# ==========================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# JetBrains / WebStorm
+.idea/
+*.sublime-workspace
+*.sublime-project
