@@ -1,6 +1,6 @@
 import { SearchResultResponse, ProductDetailResponse, ComparedProductGroup, PlatformOffer } from './types';
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://checkgonshop-api.onrender.com';
 
 function generateClientFallback(rawQuery: string): SearchResultResponse {
   let q = (rawQuery || 'iPhone 16').trim();
@@ -140,9 +140,11 @@ export async function searchProducts(params: {
   if (params.maxPrice) queryParams.set('maxPrice', params.maxPrice.toString());
   if (params.refresh) queryParams.set('refresh', 'true');
 
+  const isServer = typeof window === 'undefined';
+
   try {
     const res = await fetch(`${API_BASE}/api/search?${queryParams.toString()}`, {
-      cache: 'no-store',
+      ...(isServer ? { next: { revalidate: 300 } } : { cache: 'no-store' }),
     });
     if (!res.ok) {
       throw new Error(`API error: ${res.statusText}`);
@@ -167,9 +169,10 @@ export async function getTrendingKeywords(): Promise<string[]> {
 
 export async function getSuggestions(q: string): Promise<string[]> {
   if (!q.trim()) return [];
+  const isServer = typeof window === 'undefined';
   try {
     const res = await fetch(`${API_BASE}/api/search/suggestions?q=${encodeURIComponent(q)}`, {
-      cache: 'no-store',
+      ...(isServer ? { next: { revalidate: 300 } } : { cache: 'no-store' }),
     });
     if (!res.ok) return [];
     const data = await res.json();
@@ -180,9 +183,10 @@ export async function getSuggestions(q: string): Promise<string[]> {
 }
 
 export async function getProductDetail(id: string): Promise<ProductDetailResponse | null> {
+  const isServer = typeof window === 'undefined';
   try {
     const res = await fetch(`${API_BASE}/api/products/${encodeURIComponent(id)}`, {
-      cache: 'no-store',
+      ...(isServer ? { next: { revalidate: 300 } } : { cache: 'no-store' }),
     });
     if (!res.ok) return null;
     return await res.json();

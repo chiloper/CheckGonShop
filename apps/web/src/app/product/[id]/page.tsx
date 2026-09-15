@@ -22,6 +22,18 @@ interface ProductPageProps {
   };
 }
 
+export async function generateStaticParams() {
+  return [
+    { id: 'iPhone 16' },
+    { id: 'iPhone' },
+    { id: 'iPad Air' },
+    { id: 'หูฟัง' },
+    { id: 'Dyson' },
+    { id: 'Labubu' },
+    { id: 'Nike Dunk' },
+  ];
+}
+
 export default async function ProductPage({ params }: ProductPageProps) {
   const detail = await getProductDetail(params.id);
 
