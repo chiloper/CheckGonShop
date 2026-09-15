@@ -119,3 +119,4 @@ MONGODB_URI=mongodb://localhost:27017/compare_price
 - `GET /api/products/:id`: ดูรายละเอียดสินค้า การเปรียบเทียบ และสินค้าใกล้เคียง
 - `GET /api/products/:id/history`: ดูประวัติราคาย้อนหลัง 30 วัน
 # CheckGonShop
+# CheckGonShop
