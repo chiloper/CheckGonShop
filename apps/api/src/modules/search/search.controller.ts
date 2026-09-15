@@ -5,6 +5,29 @@ import { SearchService } from './search.service';
 export class SearchController {
   constructor(private readonly searchService: SearchService) {}
 
+  @Get('health')
+  getHealth() {
+    return {
+      status: 'ok',
+      service: 'CheckGonShop API',
+      timestamp: new Date().toISOString(),
+    };
+  }
+
+  @Get()
+  getRoot() {
+    return {
+      status: 'ok',
+      service: 'CheckGonShop API',
+      endpoints: [
+        '/api/health',
+        '/api/search?q=iPhone',
+        '/api/search/trending',
+        '/api/search/suggestions',
+      ],
+    };
+  }
+
   @Get('search')
   async search(
     @Query('q') query?: string,

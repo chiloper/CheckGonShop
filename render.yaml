@@ -1,0 +1,20 @@
+﻿services:
+  - type: web
+    name: checkgonshop-api
+    runtime: node
+    plan: free
+    region: singapore
+    branch: render-api
+    buildCommand: npm install && npm run build:api
+    startCommand: node apps/api/dist/main.js
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: SCRAPER_API_KEY
+        sync: false
+      - key: MONGODB_URI
+        sync: false
