@@ -87,7 +87,7 @@ export const SimilarProductsSection: React.FC<SimilarProductsSectionProps> = ({
                   </div>
 
                   <h3 className="text-sm font-bold text-slate-800 line-clamp-2 leading-snug group-hover:text-orange-600 transition-colors">
-                    <Link href={`/product/${encodeURIComponent(item.id)}`}>
+                    <Link href={`/product?id=${encodeURIComponent(item.id)}`}>
                       {item.canonicalTitle}
                     </Link>
                   </h3>
@@ -114,7 +114,7 @@ export const SimilarProductsSection: React.FC<SimilarProductsSectionProps> = ({
                   </div>
 
                   <Link
-                    href={`/product/${encodeURIComponent(item.id)}`}
+                    href={`/product?id=${encodeURIComponent(item.id)}`}
                     className="mt-3 w-full inline-flex items-center justify-center gap-1 py-2 px-3 rounded-xl bg-slate-50 hover:bg-orange-50 text-slate-700 hover:text-orange-600 text-xs font-bold border border-slate-200 hover:border-orange-200 transition-all"
                   >
                     <ArrowRightLeft className="w-3.5 h-3.5" />

@@ -165,7 +165,7 @@ export const PriceComparisonCard: React.FC<PriceComparisonCardProps> = ({
 
             <div className="flex items-center gap-2 flex-shrink-0" onClick={(e) => e.stopPropagation()}>
               <Link
-                href={`/product/${encodeURIComponent(product.id)}`}
+                href={`/product?id=${encodeURIComponent(product.id)}`}
                 className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-slate-50 hover:bg-orange-50 text-slate-600 hover:text-orange-600 border border-slate-200 hover:border-orange-300 transition-all shadow-2xs active:scale-95"
                 title="ดูกราฟประวัติราคา"
                 aria-label="ดูกราฟประวัติราคา"
@@ -288,7 +288,7 @@ export const PriceComparisonCard: React.FC<PriceComparisonCardProps> = ({
 
             <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
               <Link
-                href={`/product/${encodeURIComponent(product.id)}`}
+                href={`/product?id=${encodeURIComponent(product.id)}`}
                 className="inline-flex items-center justify-center p-2.5 rounded-xl bg-slate-50 hover:bg-orange-50 text-slate-600 hover:text-orange-600 border border-slate-200 hover:border-orange-300 transition-all shadow-2xs active:scale-95"
                 title="ดูกราฟแนวโน้มราคา 30 วัน"
                 aria-label="ดูกราฟแนวโน้มราคา 30 วัน"
