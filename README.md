@@ -113,10 +113,60 @@ MONGODB_URI=mongodb://localhost:27017/compare_price
 
 ## 📡 REST API Endpoints
 
+- `GET /api/health`: ตรวจสอบสถานะการทำงานของ API Server (Health Check)
 - `GET /api/search?q={keyword}&platform={all|shopee|lazada|tiktok}&sort={cheapest|savings|rating|popular}`: ค้นหาและเปรียบเทียบราคา
 - `GET /api/search/trending`: ดึงรายการคำค้นหายอดนิยม
 - `GET /api/search/suggestions?q={keyword}`: Auto-complete แนะนำคำค้นหา
 - `GET /api/products/:id`: ดูรายละเอียดสินค้า การเปรียบเทียบ และสินค้าใกล้เคียง
 - `GET /api/products/:id/history`: ดูประวัติราคาย้อนหลัง 30 วัน
-# CheckGonShop
-# CheckGonShop
+
+---
+
+## 🌐 การ Deploy & Production Environments
+
+ระบบถูกแยก Deploy ตามสถาปัตยกรรม Microservices / Monorepo ดังนี้:
+
+| ส่วนของระบบ | Platform / Hosting | Production URL / Endpoint | Branch ที่ใช้ Deploy | หมายเหตุ |
+| :--- | :--- | :--- | :--- | :--- |
+| **Backend API** | **[Render](https://render.com)** (Web Service) | [`https://checkgonshop-api.onrender.com/api`](https://checkgonshop-api.onrender.com/api) | `render-api` | ภูมิภาค Singapore, Auto-deploy ผ่าน Blueprint (`render.yaml`) |
+| **API Health Check** | Render | [`https://checkgonshop-api.onrender.com/api/health`](https://checkgonshop-api.onrender.com/api/health) | `render-api` | ใช้ตรวจสอบสถานะ Uptime และ Live Probe |
+| **Frontend Web** | **[GitHub Pages](https://pages.github.com/)** | [`https://chiloper.github.io/CheckGonShop/`](https://chiloper.github.io/CheckGonShop/) | `deploy-gh-pages` | Next.js Static Export ผ่าน GitHub Actions Workflow |
+
+> **หมายเหตุสำหรับ Render Free Tier:** หากไม่มี Request เป็นเวลานาน Server จะเข้าสู่ Sleep Mode และจะใช้เวลาประมาณ 30-50 วินาทีในการตื่นขึ้นมาตอบสนองใน Request แรก
+
+---
+
+## 🛠️ เทคโนโลยีที่ใช้ (Tech Stack)
+
+### 1. Backend API (`apps/api`)
+- **Runtime:** Node.js (v20+ LTS)
+- **Framework:** **NestJS 10** (สถาปัตยกรรม Modular, Controllers, Services, Dependency Injection)
+- **Language:** **TypeScript 5**
+- **HTTP Server:** `@nestjs/platform-express`, Express
+- **Database & ODM:** 
+  - **MongoDB** / **MongoDB Atlas**
+  - **Mongoose 8** (`@nestjs/mongoose`)
+  - **In-Memory Cache Fallback:** สำหรับกรณีไม่ได้เชื่อมต่อ DB
+- **Validation & Transformation:** `class-validator`, `class-transformer`
+- **Configuration:** `@nestjs/config` (Environment Variables)
+- **Product Matching & Comparison:**
+  - `string-similarity`: คำนวณค่าความคล้ายของชื่อสินค้าข้ามแพลตฟอร์ม (Shopee, Lazada, TikTok Shop)
+  - Custom Rule-based Normalization & Best Price Scoring Algorithm
+- **HTTP Client:** `axios`, `rxjs`
+
+### 2. Frontend Web (`apps/web`)
+- **Framework:** **Next.js 14** (App Router, SSG / Static Export สำหรับ GitHub Pages)
+- **Library:** **React 18**
+- **Language:** **TypeScript 5**
+- **Styling:** **Tailwind CSS 3**, `clsx`, `tailwind-merge`
+- **UI Components & Icons:** **Lucide React**
+- **Data Visualization:** **Recharts** (กราฟแนวโน้มราคา Interactive 30 วัน)
+
+### 3. DevOps, Tooling & Infrastructure
+- **Monorepo Management:** npm Workspaces (จัดการ dependencies และ scripts ข้าม packages)
+- **Process Orchestrator:** `concurrently` (รัน Web และ API พร้อมกันในโหมด Development)
+- **Backend Hosting:** **Render** (Node.js Web Service ในสิงคโปร์ พร้อม `render.yaml`)
+- **Frontend Hosting:** **GitHub Pages** (รองรับ Client-side routing และ dynamic product view)
+- **CI/CD:** **GitHub Actions** (Automated build & deploy สำหรับ GitHub Pages)
+- **Version Control:** Git / GitHub
+
